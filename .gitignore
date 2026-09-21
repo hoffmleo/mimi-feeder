@@ -1,0 +1,5 @@
+# Mimi Feeder
+
+This file was intentionally left simple so the repository remains easy to understand and easy to show off on GitHub.
+
+The project contains the embedded firmware for a two-board ESP32-S3 automated pet feeder with FreeRTOS, BLE, UART telemetry, I2C sensors, stepper control, and RTC-backed persistence.
