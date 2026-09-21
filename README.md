@@ -19,11 +19,11 @@ This separation keeps the timing-sensitive stepper motion and sensor tasks away 
 
 - 2x ESP32-S3 boards
 - AM2320 temperature/humidity sensor
-- DS1307 RTC with battery-backed NVRAM
+- DS1307 RTC with battery-backed and NVRAM
 - 28BYJ-48 stepper motor with ULN2003 driver
-- Analog water-level sensor with power-gated sampling
+- Analog water-level sensor with periodic-powered sampling
 - 16x2 I2C LCD
-- BLE GATT service for command and status communication
+- BLE service for command and status communication
 - Status LEDs and local controls
 
 ### Embedded systems design
@@ -47,13 +47,12 @@ Both the climate readings and the water readings are debounced and confirmed bef
 
 ### Communication protocol
 
-Board A sends telemetry over UART as framed ASCII messages with a checksum, similar in spirit to NMEA 0183. Each frame includes a type and payload, and the console board validates the framing before updating its mirrored state.
+Board A sends telemetry over UART as framed ASCII messages with a checksum. Each frame includes a type and payload, and the console board validates the framing before updating its mirrored state.
 
 The protocol supports:
 
 - climate telemetry
 - water telemetry
-- schedule heartbeat reports
 - feed completion reports
 - boot reports
 - command acknowledgements
@@ -123,14 +122,6 @@ Potential enhancements include:
 - bidirectional heartbeat monitoring between the boards
 - lower-power sleep modes for battery operation
 - more automated validation and testing of the serial protocol and schedule logic
-
-## Credits
-
-This project was completed collaboratively. The final report credits:
-
-- Ayden: Board A firmware responsibilities, including sensor integration, I2C mutex design, stepper/servo drive path, and NVRAM persistence
-- Leo Hoffman: Board B firmware responsibilities, including the BLE GATT server, LCD page system, and frame parser
-- Joint work: the inter-board protocol, integration, testing, and the report itself
 
 ## License
 
